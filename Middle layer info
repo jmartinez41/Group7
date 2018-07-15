@@ -1,0 +1,22 @@
+Linking the database to the GUI
+    - ????
+
+Movie class
+    - Title
+    - Length
+    - Rating (e.g. PG-13 , R etc.)
+    - Times playing
+    - Available seating *for each time/date
+    - etc.
+    
+Seating array for each movie each time
+    - adding
+    - change seats
+    - deleting 
+    - show whats available/linking availability to GUI
+    
+Payment Function
+    - Accepts payment info
+    - Debit/Credit card only
+    
+    
