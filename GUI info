@@ -1,0 +1,23 @@
+Main Screen:
+    -Company Logo
+    -Movie Posters:
+        -Now Playing:
+          -Major movies
+          -Others
+          [need sorting option here for 1. Times 2.Major movies]
+          
+Individual Movie Screen:
+    - Times
+    - Dates
+    - Prices
+    - # of tickets
+    - payment info boxes
+    
+Choose Seating:
+    -Mapping of available seats
+    
+Confirmation page:
+    - Ticket #
+    - Seats chosen
+    - Movie details (time  & date of chosen movie)
+    - [Timer to go back to Main Screen]
