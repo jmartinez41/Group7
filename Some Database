@@ -1,0 +1,51 @@
+//I have more methods to make but the connection to the database will not work.  I'm waiting for the TA to answer me back on it.
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import com.mysql.cj.jdbc.Driver;
+
+
+public class MovieTheater {
+	static Connection connect;
+	static Statement state;
+    static PreparedStatement prepState;
+    static ResultSet resultSet;
+    
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		getDatabase();
+		movieA();
+		movieB();
+		movieC();
+		connect.close();
+   }  
+	
+	static void getDatabase() throws SQLException {
+		connect = (Connection) DriverManager.getConnection ("jdbc:mysql://127.0.0.1:3306//Movie Theater", "root", "Qutiedi379*");
+	 	System.out.println("Database Connected.");
+	}
+	
+	static void movieA() throws SQLException {
+		state = connect.createStatement();
+		ResultSet resultSet = state.executeQuery("select theater, tad from showings where movie='A'");
+		while (resultSet.next())
+		System.out.println(resultSet.getString(1) + "\t" +resultSet.getString(2));
+	}
+	
+	static void movieB() throws SQLException {
+		state = connect.createStatement();
+		ResultSet resultSet = state.executeQuery("select theater, tad from showings where movie='B'");
+		while (resultSet.next())
+		System.out.println(resultSet.getString(1) + "\t" +resultSet.getString(2));
+	}
+	
+	static void movieC() throws SQLException {
+		state = connect.createStatement();
+		ResultSet resultSet = state.executeQuery("select theater, tad from showings where movie='C'");
+		while (resultSet.next())
+		System.out.println(resultSet.getString(1) + "\t" +resultSet.getString(2));
+	}
+}
