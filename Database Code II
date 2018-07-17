@@ -1,0 +1,779 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.SQLException;
+
+public class MovieTheaterData {
+	private static Connection connect;
+	private static Statement state;
+    private static ResultSet resultSet;
+    private static PreparedStatement prepState;
+    
+	public static void main(String[] args) throws ClassNotFoundException, SQLException { //tested methods (void for now, to make sure they work)
+		connectDatabase();
+		theaters();
+		theater1();
+		theater2();
+		theater3();
+		theater4();
+		theater5();
+		movieListing();
+		movieA();
+		movieB();
+		movieC();
+		movieD();
+		movieE();
+		at12();
+		at315();
+		at430();
+		at545(
+		at7();
+		/*seatUnavailable(); //still working on these
+		theaters();
+		seatAvailable();
+		theaters();
+		theater1Full();
+		theater2Full();
+		theater3Full();
+		theater4Full();
+		theater5Full();*/
+		connect.close();
+   }  
+	
+	static void connectDatabase() throws SQLException, ClassNotFoundException { //connect to database
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/MovieTheater?serverTimezone=UTC&autoReconnect=true&useSSL=false";
+		String user = "root";
+		String password = "password";
+		
+		try {
+			Class.forName(driver);
+			connect = DriverManager.getConnection(url, user, password);
+			if(!connect.isClosed()) {
+				System.out.println("Connecting...");
+			}
+		}
+		catch (ClassNotFoundException e) {
+			System.out.println("Driver Missing!");
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			System.out.println("Database Connected!");
+		}
+	}
+	
+	static void movieListing() throws SQLException { //movies, date, times
+		state = connect.createStatement();
+		String movies = "select * from showings";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void theaters() throws SQLException { //theaters, rows, seats, availablity
+		state = connect.createStatement();
+		String theaters = "select * from theaters";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void theater1() throws SQLException { only shows theater 1
+		state = connect.createStatement();
+		String theaters = "select theater, ro, seat from theaters where theater = 1;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + "\n");
+		}
+	}
+	
+	static void theater2() throws SQLException { //only shows theater 2
+		state = connect.createStatement();
+		String theaters = "select theater, ro, seat from theaters where theater = 2;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + "\n");
+		}
+	}
+	
+	static void theater3() throws SQLException { //only show theater 3
+		state = connect.createStatement();
+		String theaters = "select theater, ro, seat from theaters where theater = 3;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + "\n");
+		}
+	}
+	
+	static void theater4() throws SQLException { //only show theater 4
+		state = connect.createStatement();
+		String theaters = "select theater, ro, seat from theaters where theater = 4;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + "\n");
+		}
+	}
+	
+	static void theater5() throws SQLException { //only shows theater 5
+		state = connect.createStatement();
+		String theaters = "select theater, ro, seat from theaters where theater = 5;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + "\n");
+		}
+	}
+	
+	static void movieA() throws SQLException { //movie A (eventally renamed), times
+		state = connect.createStatement();
+		String movies = "select theater, movie, dotw, tod from showings where movie = 'A'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieB() throws SQLException { //Movie B, times
+		state = connect.createStatement();
+		String movies = "select theater, movie, dotw, tod from showings where movie = 'B'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieC() throws SQLException { Movie C, times
+		state = connect.createStatement();
+		String movies = "select theater, movie, dotw, tod from showings where movie = 'C'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieD() throws SQLException { //movie D, times
+		state = connect.createStatement();
+		String movies = "select theater, movie, dotw, tod from showings where movie = 'D'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieE() throws SQLException { movie E, times
+		state = connect.createStatement();
+		String movies = "select theater, movie, dotw, tod from showings where movie = 'E'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void at12() throws SQLException { movies at 12pm
+		state = connect.createStatement();
+		String times = "select theater, movie, dotw, tod from showings where tod = '12:00:00'";
+		resultSet = state.executeQuery(times);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void at315() throws SQLException { //movies at 3:15
+		state = connect.createStatement();
+		String times = "select theater, movie, dotw, tod from showings where tod = '3:15:00'";
+		resultSet = state.executeQuery(times);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void at430() throws SQLException { movies at 4:30
+		state = connect.createStatement();
+		String times = "select theater, movie, dotw, tod from showings where tod = '4:30:00'";
+		resultSet = state.executeQuery(times);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void at545() throws SQLException { //movies at 5:45
+		state = connect.createStatement();
+		String times = "select theater, movie, dotw, tod from showings where tod = '5:45:00'";
+		resultSet = state.executeQuery(times);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void at7() throws SQLException { movies at 7
+		state = connect.createStatement();
+		String times = "select theater, movie, dotw, tod from showings where tod = '7:00:00'";
+		resultSet = state.executeQuery(times);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void seatAvailable() throws SQLException { //sets availability of seats
+		String availability = "update theater1 set availability = ? where row = ? && seat = ?";
+		prepState = connect.prepareStatement(availability);
+		prepState.setString(1, "AVAILABLE");
+		prepState.setString(2, "A");
+		prepState.setInt(3, 1);
+		prepState.executeUpdate();
+	}
+	
+	static void seatUnavailable() throws SQLException { //sets unavailability of seats
+		String availability = "update theater1 set availability = ? where row = ? && seat = ?";
+		prepState = connect.prepareStatement(availability);
+		prepState.setString(1, "UNAVAILABLE");
+		prepState.setString(2, "A");
+		prepState.setInt(3, 1);
+		prepState.executeUpdate();
+	}
+	
+	
+	static boolean theater1Full() throws SQLException { //checks if theater is full
+		state = connect.createStatement();
+		String times = "select row, seat from theaters where theater = 1 && availbility = AVAILABLE";
+		resultSet = state.executeQuery(times);
+		if (resultSet.wasNull())
+			return true;
+		return false;	
+	}
+	
+	static boolean theater2Full() throws SQLException { //checks if theater is full
+		state = connect.createStatement();
+		String times = "select row, seat from theaters where theater = 2 && availability = AVAILABLE";
+		resultSet = state.executeQuery(times);
+		if (resultSet.wasNull())
+			return true;
+		return false;	
+	}
+	
+	static boolean theater3Full() throws SQLException { //checks if theater is full
+		state = connect.createStatement();
+		String times = "select row, seat from theaters where theater = 3 && availbility = AVAILABLE";
+		resultSet = state.executeQuery(times);
+		if (resultSet.wasNull()) {
+			return true;
+		}return false;	
+	}
+	
+	static boolean theater4Full() throws SQLException { //checks if theater is full
+		state = connect.createStatement();
+		String times = "select row, seat from theaters where theater = 3 && availbility = AVAILABLE";
+		resultSet = state.executeQuery(times);
+		if (resultSet.wasNull()) {
+			return true;
+		}return false;	
+	}
+	
+	static boolean theater5Full() throws SQLException { //checks if theater is full
+		state = connect.createStatement();
+		String times = "select row, seat from theaters where theater = 3 && availbility = AVAILABLE";
+		resultSet = state.executeQuery(times);
+		if (resultSet.wasNull()) {
+			return true;
+		}return false;	
+	}
+} ///////////////////////////////////////////////////////////////END program
+
+OUTPUT:
+
+Connecting...
+Database Connected!
+
+Theater: 1	Row: A	Seat: 1 is AVAILABLE
+Theater: 1	Row: A	Seat: 2 is AVAILABLE
+Theater: 1	Row: A	Seat: 3 is AVAILABLE
+Theater: 1	Row: A	Seat: 4 is AVAILABLE
+Theater: 1	Row: A	Seat: 5 is AVAILABLE
+Theater: 1	Row: B	Seat: 1 is AVAILABLE
+Theater: 1	Row: B	Seat: 2 is AVAILABLE
+Theater: 1	Row: B	Seat: 3 is AVAILABLE
+Theater: 1	Row: B	Seat: 4 is AVAILABLE
+Theater: 1	Row: B	Seat: 5 is AVAILABLE
+Theater: 1	Row: C	Seat: 1 is AVAILABLE
+Theater: 1	Row: C	Seat: 2 is AVAILABLE
+Theater: 1	Row: C	Seat: 3 is AVAILABLE
+Theater: 1	Row: C	Seat: 4 is AVAILABLE
+Theater: 1	Row: C	Seat: 5 is AVAILABLE
+Theater: 1	Row: D	Seat: 1 is AVAILABLE
+Theater: 1	Row: D	Seat: 2 is AVAILABLE
+Theater: 1	Row: D	Seat: 3 is AVAILABLE
+Theater: 1	Row: D	Seat: 4 is AVAILABLE
+Theater: 1	Row: D	Seat: 5 is AVAILABLE
+Theater: 1	Row: E	Seat: 1 is AVAILABLE
+Theater: 1	Row: E	Seat: 2 is AVAILABLE
+Theater: 1	Row: E	Seat: 3 is AVAILABLE
+Theater: 1	Row: E	Seat: 4 is AVAILABLE
+Theater: 1	Row: E	Seat: 5 is AVAILABLE
+Theater: 2	Row: A	Seat: 1 is AVAILABLE
+Theater: 2	Row: A	Seat: 2 is AVAILABLE
+Theater: 2	Row: A	Seat: 3 is AVAILABLE
+Theater: 2	Row: A	Seat: 4 is AVAILABLE
+Theater: 2	Row: A	Seat: 5 is AVAILABLE
+Theater: 2	Row: B	Seat: 1 is AVAILABLE
+Theater: 2	Row: B	Seat: 2 is AVAILABLE
+Theater: 2	Row: B	Seat: 3 is AVAILABLE
+Theater: 2	Row: B	Seat: 4 is AVAILABLE
+Theater: 2	Row: B	Seat: 5 is AVAILABLE
+Theater: 2	Row: C	Seat: 1 is AVAILABLE
+Theater: 2	Row: C	Seat: 2 is AVAILABLE
+Theater: 2	Row: C	Seat: 3 is AVAILABLE
+Theater: 2	Row: C	Seat: 4 is AVAILABLE
+Theater: 2	Row: C	Seat: 5 is AVAILABLE
+Theater: 2	Row: D	Seat: 1 is AVAILABLE
+Theater: 2	Row: D	Seat: 2 is AVAILABLE
+Theater: 2	Row: D	Seat: 3 is AVAILABLE
+Theater: 2	Row: D	Seat: 4 is AVAILABLE
+Theater: 2	Row: D	Seat: 5 is AVAILABLE
+Theater: 2	Row: E	Seat: 1 is AVAILABLE
+Theater: 2	Row: E	Seat: 2 is AVAILABLE
+Theater: 2	Row: E	Seat: 3 is AVAILABLE
+Theater: 2	Row: E	Seat: 4 is AVAILABLE
+Theater: 2	Row: E	Seat: 5 is AVAILABLE
+Theater: 3	Row: A	Seat: 1 is AVAILABLE
+Theater: 3	Row: A	Seat: 2 is AVAILABLE
+Theater: 3	Row: A	Seat: 3 is AVAILABLE
+Theater: 3	Row: A	Seat: 4 is AVAILABLE
+Theater: 3	Row: A	Seat: 5 is AVAILABLE
+Theater: 3	Row: B	Seat: 1 is AVAILABLE
+Theater: 3	Row: B	Seat: 2 is AVAILABLE
+Theater: 3	Row: B	Seat: 3 is AVAILABLE
+Theater: 3	Row: B	Seat: 4 is AVAILABLE
+Theater: 3	Row: B	Seat: 5 is AVAILABLE
+Theater: 3	Row: C	Seat: 1 is AVAILABLE
+Theater: 3	Row: C	Seat: 2 is AVAILABLE
+Theater: 3	Row: C	Seat: 3 is AVAILABLE
+Theater: 3	Row: C	Seat: 4 is AVAILABLE
+Theater: 3	Row: C	Seat: 5 is AVAILABLE
+Theater: 3	Row: D	Seat: 1 is AVAILABLE
+Theater: 3	Row: D	Seat: 2 is AVAILABLE
+Theater: 3	Row: D	Seat: 3 is AVAILABLE
+Theater: 3	Row: D	Seat: 4 is AVAILABLE
+Theater: 3	Row: D	Seat: 5 is AVAILABLE
+Theater: 3	Row: E	Seat: 1 is AVAILABLE
+Theater: 3	Row: E	Seat: 2 is AVAILABLE
+Theater: 3	Row: E	Seat: 3 is AVAILABLE
+Theater: 3	Row: E	Seat: 4 is AVAILABLE
+Theater: 3	Row: E	Seat: 5 is AVAILABLE
+Theater: 4	Row: A	Seat: 1 is AVAILABLE
+Theater: 4	Row: A	Seat: 2 is AVAILABLE
+Theater: 4	Row: A	Seat: 3 is AVAILABLE
+Theater: 4	Row: A	Seat: 4 is AVAILABLE
+Theater: 4	Row: A	Seat: 5 is AVAILABLE
+Theater: 4	Row: B	Seat: 1 is AVAILABLE
+Theater: 4	Row: B	Seat: 2 is AVAILABLE
+Theater: 4	Row: B	Seat: 3 is AVAILABLE
+Theater: 4	Row: B	Seat: 4 is AVAILABLE
+Theater: 4	Row: B	Seat: 5 is AVAILABLE
+Theater: 4	Row: C	Seat: 1 is AVAILABLE
+Theater: 4	Row: C	Seat: 2 is AVAILABLE
+Theater: 4	Row: C	Seat: 3 is AVAILABLE
+Theater: 4	Row: C	Seat: 4 is AVAILABLE
+Theater: 4	Row: C	Seat: 5 is AVAILABLE
+Theater: 4	Row: D	Seat: 1 is AVAILABLE
+Theater: 4	Row: D	Seat: 2 is AVAILABLE
+Theater: 4	Row: D	Seat: 3 is AVAILABLE
+Theater: 4	Row: D	Seat: 4 is AVAILABLE
+Theater: 4	Row: D	Seat: 5 is AVAILABLE
+Theater: 4	Row: E	Seat: 1 is AVAILABLE
+Theater: 4	Row: E	Seat: 2 is AVAILABLE
+Theater: 4	Row: E	Seat: 3 is AVAILABLE
+Theater: 4	Row: E	Seat: 4 is AVAILABLE
+Theater: 4	Row: E	Seat: 5 is AVAILABLE
+Theater: 5	Row: A	Seat: 1 is AVAILABLE
+Theater: 5	Row: A	Seat: 2 is AVAILABLE
+Theater: 5	Row: A	Seat: 3 is AVAILABLE
+Theater: 5	Row: A	Seat: 4 is AVAILABLE
+Theater: 5	Row: A	Seat: 5 is AVAILABLE
+Theater: 5	Row: B	Seat: 1 is AVAILABLE
+Theater: 5	Row: B	Seat: 2 is AVAILABLE
+Theater: 5	Row: B	Seat: 3 is AVAILABLE
+Theater: 5	Row: B	Seat: 4 is AVAILABLE
+Theater: 5	Row: B	Seat: 5 is AVAILABLE
+Theater: 5	Row: C	Seat: 1 is AVAILABLE
+Theater: 5	Row: C	Seat: 2 is AVAILABLE
+Theater: 5	Row: C	Seat: 3 is AVAILABLE
+Theater: 5	Row: C	Seat: 4 is AVAILABLE
+Theater: 5	Row: C	Seat: 5 is AVAILABLE
+Theater: 5	Row: D	Seat: 1 is AVAILABLE
+Theater: 5	Row: D	Seat: 2 is AVAILABLE
+Theater: 5	Row: D	Seat: 3 is AVAILABLE
+Theater: 5	Row: D	Seat: 4 is AVAILABLE
+Theater: 5	Row: D	Seat: 5 is AVAILABLE
+Theater: 5	Row: E	Seat: 1 is AVAILABLE
+Theater: 5	Row: E	Seat: 2 is AVAILABLE
+Theater: 5	Row: E	Seat: 3 is AVAILABLE
+Theater: 5	Row: E	Seat: 4 is AVAILABLE
+Theater: 5	Row: E	Seat: 5 is AVAILABLE
+////////////////////////////////////////////////////////////////////////
+Theater: 1	Row: A	Seat: 1
+Theater: 1	Row: A	Seat: 2
+Theater: 1	Row: A	Seat: 3
+Theater: 1	Row: A	Seat: 4
+Theater: 1	Row: A	Seat: 5
+Theater: 1	Row: B	Seat: 1
+Theater: 1	Row: B	Seat: 2
+Theater: 1	Row: B	Seat: 3
+Theater: 1	Row: B	Seat: 4
+Theater: 1	Row: B	Seat: 5
+Theater: 1	Row: C	Seat: 1
+Theater: 1	Row: C	Seat: 2
+Theater: 1	Row: C	Seat: 3
+Theater: 1	Row: C	Seat: 4
+Theater: 1	Row: C	Seat: 5
+Theater: 1	Row: D	Seat: 1
+Theater: 1	Row: D	Seat: 2
+Theater: 1	Row: D	Seat: 3
+Theater: 1	Row: D	Seat: 4
+Theater: 1	Row: D	Seat: 5
+Theater: 1	Row: E	Seat: 1
+Theater: 1	Row: E	Seat: 2
+Theater: 1	Row: E	Seat: 3
+Theater: 1	Row: E	Seat: 4
+Theater: 1	Row: E	Seat: 5
+
+Theater: 2	Row: A	Seat: 1
+Theater: 2	Row: A	Seat: 2
+Theater: 2	Row: A	Seat: 3
+Theater: 2	Row: A	Seat: 4
+Theater: 2	Row: A	Seat: 5
+Theater: 2	Row: B	Seat: 1
+Theater: 2	Row: B	Seat: 2
+Theater: 2	Row: B	Seat: 3
+Theater: 2	Row: B	Seat: 4
+Theater: 2	Row: B	Seat: 5
+Theater: 2	Row: C	Seat: 1
+Theater: 2	Row: C	Seat: 2
+Theater: 2	Row: C	Seat: 3
+Theater: 2	Row: C	Seat: 4
+Theater: 2	Row: C	Seat: 5
+Theater: 2	Row: D	Seat: 1
+Theater: 2	Row: D	Seat: 2
+Theater: 2	Row: D	Seat: 3
+Theater: 2	Row: D	Seat: 4
+Theater: 2	Row: D	Seat: 5
+Theater: 2	Row: E	Seat: 1
+Theater: 2	Row: E	Seat: 2
+Theater: 2	Row: E	Seat: 3
+Theater: 2	Row: E	Seat: 4
+Theater: 2	Row: E	Seat: 5
+
+Theater: 3	Row: A	Seat: 1
+Theater: 3	Row: A	Seat: 2
+Theater: 3	Row: A	Seat: 3
+Theater: 3	Row: A	Seat: 4
+Theater: 3	Row: A	Seat: 5
+Theater: 3	Row: B	Seat: 1
+Theater: 3	Row: B	Seat: 2
+Theater: 3	Row: B	Seat: 3
+Theater: 3	Row: B	Seat: 4
+Theater: 3	Row: B	Seat: 5
+Theater: 3	Row: C	Seat: 1
+Theater: 3	Row: C	Seat: 2
+Theater: 3	Row: C	Seat: 3
+Theater: 3	Row: C	Seat: 4
+Theater: 3	Row: C	Seat: 5
+Theater: 3	Row: D	Seat: 1
+Theater: 3	Row: D	Seat: 2
+Theater: 3	Row: D	Seat: 3
+Theater: 3	Row: D	Seat: 4
+Theater: 3	Row: D	Seat: 5
+Theater: 3	Row: E	Seat: 1
+Theater: 3	Row: E	Seat: 2
+Theater: 3	Row: E	Seat: 3
+Theater: 3	Row: E	Seat: 4
+Theater: 3	Row: E	Seat: 5
+
+Theater: 4	Row: A	Seat: 1
+Theater: 4	Row: A	Seat: 2
+Theater: 4	Row: A	Seat: 3
+Theater: 4	Row: A	Seat: 4
+Theater: 4	Row: A	Seat: 5
+Theater: 4	Row: B	Seat: 1
+Theater: 4	Row: B	Seat: 2
+Theater: 4	Row: B	Seat: 3
+Theater: 4	Row: B	Seat: 4
+Theater: 4	Row: B	Seat: 5
+Theater: 4	Row: C	Seat: 1
+Theater: 4	Row: C	Seat: 2
+Theater: 4	Row: C	Seat: 3
+Theater: 4	Row: C	Seat: 4
+Theater: 4	Row: C	Seat: 5
+Theater: 4	Row: D	Seat: 1
+Theater: 4	Row: D	Seat: 2
+Theater: 4	Row: D	Seat: 3
+Theater: 4	Row: D	Seat: 4
+Theater: 4	Row: D	Seat: 5
+Theater: 4	Row: E	Seat: 1
+Theater: 4	Row: E	Seat: 2
+Theater: 4	Row: E	Seat: 3
+Theater: 4	Row: E	Seat: 4
+Theater: 4	Row: E	Seat: 5
+
+Theater: 5	Row: A	Seat: 1
+Theater: 5	Row: A	Seat: 2
+Theater: 5	Row: A	Seat: 3
+Theater: 5	Row: A	Seat: 4
+Theater: 5	Row: A	Seat: 5
+Theater: 5	Row: B	Seat: 1
+Theater: 5	Row: B	Seat: 2
+Theater: 5	Row: B	Seat: 3
+Theater: 5	Row: B	Seat: 4
+Theater: 5	Row: B	Seat: 5
+Theater: 5	Row: C	Seat: 1
+Theater: 5	Row: C	Seat: 2
+Theater: 5	Row: C	Seat: 3
+Theater: 5	Row: C	Seat: 4
+Theater: 5	Row: C	Seat: 5
+Theater: 5	Row: D	Seat: 1
+Theater: 5	Row: D	Seat: 2
+Theater: 5	Row: D	Seat: 3
+Theater: 5	Row: D	Seat: 4
+Theater: 5	Row: D	Seat: 5
+Theater: 5	Row: E	Seat: 1
+Theater: 5	Row: E	Seat: 2
+Theater: 5	Row: E	Seat: 3
+Theater: 5	Row: E	Seat: 4
+Theater: 5	Row: E	Seat: 5
+///////////////////////////////////////////////////////////////////////////////
+Theater: 1	Movie: A	Date: 2018-07-07	Time: 12:00:00
+Theater: 1	Movie: B	Date: 2018-07-07	Time: 03:15:00
+Theater: 1	Movie: C	Date: 2018-07-07	Time: 04:30:00
+Theater: 1	Movie: D	Date: 2018-07-07	Time: 05:45:00
+Theater: 1	Movie: E	Date: 2018-07-07	Time: 07:00:00
+Theater: 2	Movie: B	Date: 2018-07-07	Time: 12:00:00
+Theater: 2	Movie: C	Date: 2018-07-07	Time: 03:15:00
+Theater: 2	Movie: A	Date: 2018-07-07	Time: 04:30:00
+Theater: 2	Movie: E	Date: 2018-07-07	Time: 05:45:00
+Theater: 2	Movie: D	Date: 2018-07-07	Time: 07:00:00
+Theater: 3	Movie: D	Date: 2018-07-07	Time: 12:00:00
+Theater: 3	Movie: A	Date: 2018-07-07	Time: 03:15:00
+Theater: 3	Movie: E	Date: 2018-07-07	Time: 04:30:00
+Theater: 3	Movie: C	Date: 2018-07-07	Time: 05:45:00
+Theater: 3	Movie: B	Date: 2018-07-07	Time: 07:00:00
+Theater: 4	Movie: E	Date: 2018-07-07	Time: 12:00:00
+Theater: 4	Movie: B	Date: 2018-07-07	Time: 03:15:00
+Theater: 4	Movie: D	Date: 2018-07-07	Time: 04:30:00
+Theater: 4	Movie: C	Date: 2018-07-07	Time: 05:45:00
+Theater: 4	Movie: A	Date: 2018-07-07	Time: 07:00:00
+Theater: 5	Movie: D	Date: 2018-07-07	Time: 12:00:00
+Theater: 5	Movie: E	Date: 2018-07-07	Time: 03:15:00
+Theater: 5	Movie: A	Date: 2018-07-07	Time: 04:30:00
+Theater: 5	Movie: B	Date: 2018-07-07	Time: 05:45:00
+Theater: 5	Movie: C	Date: 2018-07-07	Time: 07:00:00
+///////////////////////////////////////////////////////////////////////////////
+Theater: 1	Movie: A	Date: 2018-07-07	Time: 12:00:00
+Theater: 2	Movie: A	Date: 2018-07-07	Time: 04:30:00
+Theater: 3	Movie: A	Date: 2018-07-07	Time: 03:15:00
+Theater: 4	Movie: A	Date: 2018-07-07	Time: 07:00:00
+Theater: 5	Movie: A	Date: 2018-07-07	Time: 04:30:00
+
+Theater: 1	Movie: B	Date: 2018-07-07	Time: 03:15:00
+Theater: 2	Movie: B	Date: 2018-07-07	Time: 12:00:00
+Theater: 3	Movie: B	Date: 2018-07-07	Time: 07:00:00
+Theater: 4	Movie: B	Date: 2018-07-07	Time: 03:15:00
+Theater: 5	Movie: B	Date: 2018-07-07	Time: 05:45:00
+
+Theater: 1	Movie: C	Date: 2018-07-07	Time: 04:30:00
+Theater: 2	Movie: C	Date: 2018-07-07	Time: 03:15:00
+Theater: 3	Movie: C	Date: 2018-07-07	Time: 05:45:00
+Theater: 4	Movie: C	Date: 2018-07-07	Time: 05:45:00
+Theater: 5	Movie: C	Date: 2018-07-07	Time: 07:00:00
+
+Theater: 1	Movie: D	Date: 2018-07-07	Time: 05:45:00
+Theater: 2	Movie: D	Date: 2018-07-07	Time: 07:00:00
+Theater: 3	Movie: D	Date: 2018-07-07	Time: 12:00:00
+Theater: 4	Movie: D	Date: 2018-07-07	Time: 04:30:00
+Theater: 5	Movie: D	Date: 2018-07-07	Time: 12:00:00
+
+Theater: 1	Movie: E	Date: 2018-07-07	Time: 07:00:00
+Theater: 2	Movie: E	Date: 2018-07-07	Time: 05:45:00
+Theater: 3	Movie: E	Date: 2018-07-07	Time: 04:30:00
+Theater: 4	Movie: E	Date: 2018-07-07	Time: 12:00:00
+Theater: 5	Movie: E	Date: 2018-07-07	Time: 03:15:00
+/////////////////////////////////////////////////////////////////////////////////
+Theater: 1	Movie: A	Date: 2018-07-07	Time: 12:00:00
+Theater: 2	Movie: B	Date: 2018-07-07	Time: 12:00:00
+Theater: 3	Movie: D	Date: 2018-07-07	Time: 12:00:00
+Theater: 4	Movie: E	Date: 2018-07-07	Time: 12:00:00
+Theater: 5	Movie: D	Date: 2018-07-07	Time: 12:00:00
+
+Theater: 1	Movie: B	Date: 2018-07-07	Time: 03:15:00
+Theater: 2	Movie: C	Date: 2018-07-07	Time: 03:15:00
+Theater: 3	Movie: A	Date: 2018-07-07	Time: 03:15:00
+Theater: 4	Movie: B	Date: 2018-07-07	Time: 03:15:00
+Theater: 5	Movie: E	Date: 2018-07-07	Time: 03:15:00
+
+Theater: 1	Movie: C	Date: 2018-07-07	Time: 04:30:00
+Theater: 2	Movie: A	Date: 2018-07-07	Time: 04:30:00
+Theater: 3	Movie: E	Date: 2018-07-07	Time: 04:30:00
+Theater: 4	Movie: D	Date: 2018-07-07	Time: 04:30:00
+Theater: 5	Movie: A	Date: 2018-07-07	Time: 04:30:00
+
+Theater: 1	Movie: D	Date: 2018-07-07	Time: 05:45:00
+Theater: 2	Movie: E	Date: 2018-07-07	Time: 05:45:00
+Theater: 3	Movie: C	Date: 2018-07-07	Time: 05:45:00
+Theater: 4	Movie: C	Date: 2018-07-07	Time: 05:45:00
+Theater: 5	Movie: B	Date: 2018-07-07	Time: 05:45:00
+
+Theater: 1	Movie: E	Date: 2018-07-07	Time: 07:00:00
+Theater: 2	Movie: D	Date: 2018-07-07	Time: 07:00:00
+Theater: 3	Movie: B	Date: 2018-07-07	Time: 07:00:00
+Theater: 4	Movie: A	Date: 2018-07-07	Time: 07:00:00
+Theater: 5	Movie: C	Date: 2018-07-07	Time: 07:00:00
