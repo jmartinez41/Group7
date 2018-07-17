@@ -35,7 +35,7 @@ public class Conn {
 				System.out.println(name + "\t" + time);
 			}
 			
-      rs.close();
+      			rs.close();
 			con.close();
 		
     } catch (ClassNotFoundException e) {
