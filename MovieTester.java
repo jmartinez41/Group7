@@ -43,7 +43,7 @@
 			pb.add("Movie 2", "2:00", "1");
 						
 			pb.show();
-			//pb.edit();//pb.delete();//pb.search();
+			
 		}	
 	}
 	class CinemaBooking{
