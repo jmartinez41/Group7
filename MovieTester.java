@@ -1,5 +1,7 @@
 	
 	import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 	class Movies {
 		String Name;
@@ -37,12 +39,25 @@
 	}
 	
 	public class MovieTester{
-		public static void main(String args[]){
+		public static void main(String args[])
+		{
+		 
+			SwingUtilities.invokeLater(new Runnable() {
+		        public void run() {
+		        	MainScreen gui = new MainScreen();
+		            JFrame frame = new JFrame();
+		            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		            frame.getContentPane().add(gui);
+		            frame.pack();
+		            frame.setVisible(true);
+		        }
+		    });
+			
 			CinemaBooking pb = new CinemaBooking();
 		   pb.add("Incredibles", "1:00", "1");
 			pb.add("Movie 2", "2:00", "1");
 						
-			pb.show();
+			//pb.show();
 			
 		}	
 	}
@@ -64,4 +79,4 @@
 			System.out.println("////////////////////////////////////////////////////////////////////////");
 		}
 	
-	}
+	
