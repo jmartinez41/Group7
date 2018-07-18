@@ -1,5 +1,4 @@
-	
-	import java.util.ArrayList;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -54,7 +53,7 @@ import javax.swing.SwingUtilities;
 		    });
 			
 			CinemaBooking pb = new CinemaBooking();
-		   pb.add("Incredibles", "1:00", "1");
+		  	pb.add("Incredibles", "1:00", "1");
 			pb.add("Movie 2", "2:00", "1");
 						
 			//pb.show();
@@ -76,7 +75,7 @@ import javax.swing.SwingUtilities;
 				System.out.println(" Movie Name: "+ item.getName() + 
 						" Movie time: "+ item.getTime() + " Theater Number: "+ item.getTheater());
 			}
-			System.out.println("////////////////////////////////////////////////////////////////////////");
+			
 		}
 	
 	
