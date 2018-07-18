@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-public class MovieTimes {
+public class MovieTimes extends JPanel {
 	
 	private JPanel titlePanel;
 	private JPanel timeOnePanel;
