@@ -51,7 +51,7 @@ public class Movie {
 
 	}
 
-	public static void getInfoFromTable() throws SQLException {
+	public static String getInfoFromTable() throws SQLException {
 
 		PreparedStatement pstmt;
 		String sql = "SELECT dotw, tod FROM showings WHERE movie = ?";
@@ -61,7 +61,7 @@ public class Movie {
 		
 		ResultSet rs = pstmt.executeQuery();
 
-		System.out.println("show as follow:");
+		//System.out.println("show as follow:");
 		String dotw = null; 
 		String tod = null;
 
@@ -69,8 +69,8 @@ public class Movie {
 
 			dotw = rs.getString("dotw");
 			tod = rs.getString("tod");
-			System.out.println(dotw + "\t" + tod);
-		}		        
+		}
+		return dotw + "\t" + tod;
 				
 	}
 
