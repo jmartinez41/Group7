@@ -1,9 +1,14 @@
+//This code is for selecting information of any movie in database by its title.
+//This should be connected with GUI in Tester.
+
 import java.sql.*;
 import java.sql.PreparedStatement;
 
 public class Movie {
 
-	public static String title;
+	private static String title;
+	private static Connection con;
+
 
 	public Movie(String t) {
 		this.title = t;
@@ -18,8 +23,7 @@ public class Movie {
 	}
 
 	public static void connectDatabase() throws SQLException, ClassNotFoundException {
-		
-		Connection con;
+
 		String driver = "com.mysql.cj.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/MovieTheater?serverTimezone=UTC&autoReconnect=true&useSSL=false";
 		String user = "root";
@@ -49,12 +53,11 @@ public class Movie {
 
 	public static void getInfoFromTable() throws SQLException {
 
-		Connection dbCon;
 		PreparedStatement pstmt;
 		String sql = "SELECT dotw, tod FROM showings WHERE movie = ?";
-		pstmt = dbCon.prepareStatement(sql);
-    
-    pstmt.setString(1,title);
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setString(1,title);
 		
 		ResultSet rs = pstmt.executeQuery();
 
