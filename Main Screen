@@ -1,10 +1,13 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +25,11 @@ public class MainScreen extends JPanel{
 	private JButton Movie3;
 	private JButton Movie4;
 	private JButton Movie5; 
-	
+	private JLabel Movie1Label;
+	private JLabel Movie2Label;
+	private JLabel Movie3Label;
+	private JLabel Movie4Label;
+	private JLabel Movie5Label;
 	
 	//Constructor
 	MainScreen(){
@@ -45,12 +52,24 @@ public class MainScreen extends JPanel{
 		Movie2 = new JButton();
 		majorMoviesPanel.add(Movie1);
 		majorMoviesPanel.add(Movie2);
-		Movie1.setPreferredSize(new Dimension(350,400));
-		Movie2.setPreferredSize(new Dimension(350,400));
+		Movie1.setPreferredSize(new Dimension(300,350));
+		Movie2.setPreferredSize(new Dimension(300,350));
 		MovieListener m1listener = new MovieListener();
 		Movie1.addActionListener(m1listener);
 		MovieListener m2listener = new MovieListener();
 		Movie2.addActionListener(m2listener);
+		
+					//ADDED LABELS TO BUTTONS
+					Movie1Label = new JLabel();
+					Movie1.add(Movie1Label);
+					Movie1Label.setText("Avengers Infinity War");
+					Movie1Label.setFont(new Font("Courier New", Font.BOLD, 20));
+					
+					Movie2Label = new JLabel();
+					Movie2.add(Movie2Label);
+					Movie2Label.setText("Jurrassic World: Fallen Kingdom");
+					Movie2Label.setFont(new Font("Courier New", Font.BOLD, 20));
+		
 		
 		//Other Movies Panel
 		otherMoviesPanel = new JPanel();
@@ -65,6 +84,21 @@ public class MainScreen extends JPanel{
 		otherMoviesPanel.add(Movie3);
 		otherMoviesPanel.add(Movie4);
 		otherMoviesPanel.add(Movie5);
+						//ADDED LABELS TO BUTTONS
+						Movie3Label = new JLabel();
+						Movie3.add(Movie3Label);
+						Movie3Label.setText("Ant-Man and the Wasp");
+						Movie3Label.setFont(new Font("Courier New", Font.BOLD, 15));
+						
+						Movie4Label = new JLabel();
+						Movie4.add(Movie4Label);
+						Movie4Label.setText("Incredibles 2");
+						Movie4Label.setFont(new Font("Courier New", Font.BOLD, 15));
+						
+						Movie5Label = new JLabel();
+						Movie5.add(Movie5Label);
+						Movie5Label.setText("BIG 30: Anniversary");
+						Movie5Label.setFont(new Font("Courier New", Font.BOLD, 15));
 		
 		//Background
 		JPanel controls = new JPanel();
