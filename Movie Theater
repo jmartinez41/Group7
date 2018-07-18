@@ -1,0 +1,657 @@
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class MovieTheater {
+	
+	public static void main(String[] args) {
+		
+	}
+
+}
+
+class MovieTheaterData {
+	private static Connection connect;
+	private static Statement state;
+    private static ResultSet resultSet;
+    static Scanner user = new Scanner(System.in);
+    
+	static void connectDatabase() throws SQLException, ClassNotFoundException {
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/MovieTheater?serverTimezone=UTC&autoReconnect=true&useSSL=false";
+		String user = "root";
+		String password = "Qutiedi379*";
+		
+		try {
+			Class.forName(driver);
+			connect = DriverManager.getConnection(url, user, password);
+			if(!connect.isClosed()) {
+				//System.out.println("Connecting...");
+			}
+		}
+		catch (ClassNotFoundException e) {
+			System.out.println("Driver Missing!");
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			//System.out.println("Database Connected!");
+		}
+	}
+	
+	static void movieListing() throws SQLException { 
+		state = connect.createStatement();
+		String movies = "select * from showings";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void theaters() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theaters";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void theater1() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theater1";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void theater2() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theater2;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void theater3() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theater3;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void theater4() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theater4;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void theater5() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theater5;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void movieA() throws SQLException { 
+		state = connect.createStatement();
+		String movies = "select theater, tod from showings where movie like 'A%p'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieB() throws SQLException {
+		state = connect.createStatement();
+		String movies = "select theater, tod from showings where movie like 'I%2'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieC() throws SQLException { 
+		state = connect.createStatement();
+		String movies = "select theater, tod from showings where movie like 'A%r'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieD() throws SQLException {
+		state = connect.createStatement();
+		String movies = "select theater, tod from showings where movie like 'J%m'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieE() throws SQLException {
+		state = connect.createStatement();
+		String movies = "select theater, tod from showings where movie like 'B%)'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void seatBecomeAvThea1() throws SQLException {
+		String availUpdate = "update theater1 set availability = 'AVAILABLE' where availability = 'UNAVAILABLE'";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.executeUpdate();
+	}
+	
+	static void seatBecomeAvThea2() throws SQLException {
+		String availUpdate = "update theater2 set availability = 'AVAILABLE' where availability = 'UNAVAILABLE'";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.executeUpdate();
+	}
+	
+	static void seatBecomeAvThea3() throws SQLException {
+		String availUpdate = "update theater3 set availability = 'AVAILABLE' where availability = 'UNAVAILABLE'";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.executeUpdate();
+	}
+	
+	static void seatBecomeAvThea4() throws SQLException {
+		String availUpdate = "update theater4 set availability = 'AVAILABLE' where availability = 'UNAVAILABLE'";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.executeUpdate();
+	}
+	
+	static void seatBecomeAvThea5() throws SQLException {
+		String availUpdate = "update theater5 set availability = 'AVAILABLE' where availability = 'UNAVAILABLE'";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.executeUpdate();
+	}
+	
+	static void seatUnThea1() throws SQLException {
+		Seating s = new Seating();
+		System.out.print("Row: ");
+		String row = user.next().toUpperCase();
+		System.out.print("Seat: ");
+		int seat = user.nextInt();
+		s.add(row, seat);
+		String availUpdate = "update theater1 set availability = 'UNAVAILABLE' where ro = ? && seat = ?";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.setString(1, row);
+		unavail.setInt(2, seat);
+		unavail.executeUpdate();
+	}
+	
+	static void seatUnThea2() throws SQLException {
+		System.out.println("*******Seats Available*******");
+		theater2();
+		System.out.print("Row: ");
+		String row = user.next().toUpperCase();
+		System.out.print("Seat: ");
+		int seat = user.nextInt();
+		String availUpdate = "update theater2 set availability = 'UNAVAILABLE' where ro = ? && seat = ?";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.setString(1, row);
+		unavail.setInt(2, seat);
+		unavail.executeUpdate();    
+	}
+	
+	static void seatUnThea3() throws SQLException {
+		System.out.println("*******Seats Available*******");
+		theater3();
+		System.out.print("Row: ");
+		String row = user.next().toUpperCase();
+		System.out.print("Seat: ");
+		int seat = user.nextInt();
+		String availUpdate = "update theater3 set availability = 'UNAVAILABLE' where ro = ? && seat = ?";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.setString(1, row);
+		unavail.setInt(2, seat);
+		unavail.executeUpdate();   
+	}
+	
+	static void seatUnThea4() throws SQLException {
+		System.out.println("*******Seats Available*******");
+		theater4();
+		System.out.print("Row: ");
+		String row = user.next().toUpperCase();
+		System.out.print("Seat: ");
+		int seat = user.nextInt();
+		String availUpdate = "update theater4 set availability = 'UNAVAILABLE' where ro = ? && seat = ?";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.setString(1, row);
+		unavail.setInt(2, seat);
+		unavail.executeUpdate();  
+	}
+	
+	static void seatUnThea5() throws SQLException {
+		System.out.println("*******Seats Available*******");
+		theater5();
+		System.out.print("Row: ");
+		String row = user.next().toUpperCase();
+		System.out.print("Seat: ");
+		int seat = user.nextInt();
+		String availUpdate = "update theater5 set availability = 'UNAVAILABLE' where ro = ? && seat = ?";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.setString(1, row);
+		unavail.setInt(2, seat);
+		unavail.executeUpdate();   
+	}
+	
+	static boolean theater1Full() throws SQLException {
+		ArrayList<String> theater1 = new ArrayList<>();
+		state = connect.createStatement();
+		String avail = "select availability from theater1 where availability = 'AVAILABLE'";
+		resultSet = state.executeQuery(avail);
+		String seats = null;
+		while (resultSet.next()){
+			seats = resultSet.getString("availability");
+			theater1.add(seats);
+		}
+		if (theater1.isEmpty()) {
+			System.out.println("Theater 1 is Sold Out");
+			return true;
+		}return false;	
+	}
+	
+	static boolean theater2Full() throws SQLException {
+		ArrayList<String> theater2 = new ArrayList<>();
+		state = connect.createStatement();
+		String avail = "select availability from theater2 where availability = 'AVAILABLE'";
+		resultSet = state.executeQuery(avail);
+		String seats = null;
+		while (resultSet.next()){
+			seats = resultSet.getString("availability");
+			theater2.add(seats);
+		}
+		if (theater2.isEmpty()) {
+			System.out.println("Theater 2 is Sold Out");
+			return true;
+		}return false;	
+	}
+	
+	static boolean theater3Full() throws SQLException {
+		ArrayList<String> theater3 = new ArrayList<>();
+		state = connect.createStatement();
+		String avail = "select availability from theater3 where availability = 'AVAILABLE'";
+		resultSet = state.executeQuery(avail);
+		String seats = null;
+		while (resultSet.next()){
+			seats = resultSet.getString("availability");
+			theater3.add(seats);
+		}
+		if (theater3.isEmpty()) {
+			System.out.println("Theater 3 is Sold Out");
+			return true;
+		}return false;	
+	}
+	
+	static boolean theater4Full() throws SQLException {
+		ArrayList<String> theater4 = new ArrayList<>();
+		state = connect.createStatement();
+		String avail = "select availability from theater4 where availability = 'AVAILABLE'";
+		resultSet = state.executeQuery(avail);
+		String seats = null;
+		while (resultSet.next()){
+			seats = resultSet.getString("availability");
+			theater4.add(seats);
+		}
+		if (theater4.isEmpty()) {
+			System.out.println("Theater 4 is Sold Out");
+			return true;
+		}return false;	
+	}
+	
+	static boolean theater5Full() throws SQLException {
+		ArrayList<String> theater5 = new ArrayList<>();
+		state = connect.createStatement();
+		String avail = "select availability from theater5 where availability = 'AVAILABLE'";
+		resultSet = state.executeQuery(avail);
+		String seats = null;
+		while (resultSet.next()){
+			seats = resultSet.getString("availability");
+			theater5.add(seats);
+		}
+		if (theater5.isEmpty()) {
+			System.out.println("Theater 5 is Sold Out");
+			return true;
+		}return false;	
+	}
+}
+
+class Seats {
+	String Row;
+	int Seat;
+	Seats() { }
+	public Seats(String row, int seat) {
+		super();
+		this.Row = row;
+		this.Seat = seat;
+	}
+	
+	String getRow() {
+		return Row;
+	}
+	
+	int getSeat() {
+		return Seat;
+	}
+}
+
+class Seating {
+	
+	ArrayList<Seats> s = new ArrayList<Seats>();
+	
+	String add(String row, int seat) {
+		Seats element = new Seats(row, seat);
+		s.add(element);
+		return row + seat;
+	}
+	
+	void see() {
+		for (Seats element: s) {
+			System.out.println(element.getRow() + element.getSeat() + ", ");
+			s.clear();
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@SuppressWarnings("serial")
+class MainScreen extends JPanel{
+	//Visual fields
+	private JPanel logoPanel;
+	private JPanel majorMoviesPanel;
+	private JPanel otherMoviesPanel;
+	private JLabel welcomeLabel;
+	private JButton Movie1;
+	private JButton Movie2;
+	private JButton Movie3;
+	private JButton Movie4;
+	private JButton Movie5; 
+	
+	
+	//Constructor
+	MainScreen(){
+		
+		//Set Logo Panel
+		logoPanel = new JPanel(); //add image later
+		logoPanel.setPreferredSize(new Dimension(1000, 100));
+		logoPanel.setBackground(Color.blue);	
+		welcomeLabel = new JLabel();
+		logoPanel.add(welcomeLabel);
+		welcomeLabel.setText("CineWorld 7 XD");
+		welcomeLabel.setFont(new Font("Courier New", Font.BOLD, 36));
+		
+		
+		//Major Movies Panel
+		majorMoviesPanel = new JPanel();
+		majorMoviesPanel.setPreferredSize(new Dimension(900, 400));
+		majorMoviesPanel.setBackground(Color.black);
+		Movie1 = new JButton();
+		Movie2 = new JButton();
+		majorMoviesPanel.add(Movie1);
+		majorMoviesPanel.add(Movie2);
+		Movie1.setPreferredSize(new Dimension(350,400));
+		Movie2.setPreferredSize(new Dimension(350,400));
+		MovieListener m1listener = new MovieListener();
+		Movie1.addActionListener(m1listener);
+		MovieListener m2listener = new MovieListener();
+		Movie2.addActionListener(m2listener);
+		
+		//Other Movies Panel
+		otherMoviesPanel = new JPanel();
+		otherMoviesPanel.setPreferredSize(new Dimension(900, 300));
+		otherMoviesPanel.setBackground(Color.black);
+		Movie3 = new JButton();
+		Movie4 = new JButton();
+		Movie5 = new JButton();
+		Movie3.setPreferredSize(new Dimension(250,300));
+		Movie4.setPreferredSize(new Dimension(250,300));
+		Movie5.setPreferredSize(new Dimension(250,300));
+		otherMoviesPanel.add(Movie3);
+		otherMoviesPanel.add(Movie4);
+		otherMoviesPanel.add(Movie5);
+		
+		//Background
+		JPanel controls = new JPanel();
+		BoxLayout layout = new BoxLayout(controls, BoxLayout.Y_AXIS);
+		controls.setLayout(layout);
+		setPreferredSize(new Dimension(1000, 1050));
+		setBackground(Color.black);
+		
+		//Adding all panels to the screen
+		add(logoPanel);
+		add(majorMoviesPanel);
+		add(otherMoviesPanel);
+
+	}
+	
+	//Activating movie buttons
+	private class MovieListener implements ActionListener{
+		public void actionPerformed(ActionEvent event){
+			if(event.getSource() == Movie1) {
+				
+			}
+			if(event.getSource() == Movie2) {
+				//go to movie2 ticket screen
+			}
+			if(event.getSource() == Movie3) {
+				//go to movie3 ticket screen
+			}
+			if(event.getSource() == Movie4) {
+				//go to movie4 ticket screen
+			}
+			if(event.getSource() == Movie5) {
+				//go to movie5 ticket screen
+			}
+	}
+}
+	
+	
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Welcome"); //What it says at top of window
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		MainScreen panel = new MainScreen(); 
+		frame.getContentPane().add(panel);
+		frame.pack(); frame.setVisible(true);
+	}
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@SuppressWarnings("serial")
+class SeatingScreen extends JPanel{
+	  JPanel top;
+	  JPanel seats;
+	  JPanel screen;
+	  JLabel screenText;
+	  JLabel topText;
+	  
+	  SeatingScreen(){
+	   //Initialize panels
+	    top = new JPanel();
+	    top.setPreferredSize(new Dimension(300, 600));
+	    top.setBackground(Color.white);
+	    topText = new JLabel("Choose your seats");
+	    top.add(topText);
+	    
+	    screen = new JPanel();
+	    screen.setPreferredSize(new Dimension(900, 50));
+	    screen.setBackground(Color.black);
+	    screenText = new JLabel("SCREEN");
+	    screenText.setFont(new Font("Courier New", Font.BOLD, 36));
+	    screen.add(screenText);
+	    screen.setBackground(Color.blue);
+	    
+	    seats = new JPanel();
+	    top.setPreferredSize(new Dimension(400, 400));
+	    top.setBackground(Color.black);
+	    GridLayout seatsgrid = new GridLayout(6,6);
+	    seats.setLayout(seatsgrid);  //extra row and column to display row and column labels i.e. rowA seat1
+	    
+	    //Adding labels to row numbers
+	    char letter = 'E';
+	    String strletter;
+	    for(int i=1; i<=6; i++){
+	    		strletter = Character.toString(letter);
+	      		JLabel label = new JLabel(strletter); 
+	      		seats.add(label,i,0);
+	      		letter--;
+	    }
+	    
+	    //Adding numbers
+	    for(int j=1; j<= 6; j++){
+	      		String temp = Integer.toString(j);
+	            JLabel label = new JLabel(temp);	
+	      		seats.add(label,0,j);
+	    }
+	        
+	    //Adding checkboxes to the grid
+	    for(int m = 1; m < 6; m++) {
+	   		for(int n = 1; n < 6; n++) {
+	   			//check database here for if seat is taken
+	   			JCheckBox box = new JCheckBox();
+	   			seats.add(box,m,n);
+	   		}
+	    }  
+	    
+		//Background
+		JPanel controls = new JPanel();
+		BoxLayout layout = new BoxLayout(controls, BoxLayout.Y_AXIS);
+		controls.setLayout(layout);
+		setPreferredSize(new Dimension(1000, 1050));
+		setBackground(Color.black);
+		
+		//Adding all panels to the screen
+		add(top);
+		add(seats);
+		add(screen);
+	  }
+	  
+public static void main(String[] args) {
+	JFrame frame = new JFrame("Welcome"); //What it says at top of window
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	SeatingScreen panel = new SeatingScreen(); 
+	frame.getContentPane().add(panel);
+	frame.pack(); frame.setVisible(true);
+	}	
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
