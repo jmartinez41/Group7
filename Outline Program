@@ -1,0 +1,129 @@
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Outline {
+	
+	static Scanner user = new Scanner(System.in);
+	static int movie;
+	static String show;
+	static ArrayList<Double> tickets = new ArrayList<>();
+	static DecimalFormat df = new DecimalFormat("###.###");
+	static String movies;
+	
+	@SuppressWarnings("unused")
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		
+		///////Main Screen
+		MovieTheaterData.connectDatabase();
+		System.out.println("\t\t\t\t\t\t\t**************|||   CineWorld 7 XD   |||**************\n");
+		System.out.println("Movies: 1 = Ant-Man and the Wasp   2 = Incredibles 2   3 = Avengers: Infinity War   "
+				+ "4 = Jurrassic World: Fallen Kingdom   5 = BIG: 30th Anniversary(1998)\n");
+		
+		String m1 = "Ant-Man and the Wasp";
+		String m2 = "Incredibles 2";
+		String m3 = "Avengers: Infinity War";
+		String m4 = "Jurrassic World: Fallen Kingdom";
+		String m5 = "BIG: 30th Anniversary(1998)";
+		
+		System.out.print("Choose Movie: ");
+		movie = user.nextInt();
+		
+		///////Showtimes
+		System.out.println("\nShowtimes for Saturday, July 28:\n");
+		switch (movie) {
+		case 1: 
+			MovieTheaterData.movieA();
+			movies = m1;
+			break;
+		case 2:
+			MovieTheaterData.movieB();
+			movies = m2;
+			break;
+		case 3:
+			MovieTheaterData.movieC();
+			movies = m3;
+			break;
+		case 4:
+			MovieTheaterData.movieD();
+			movies = m4;
+			break;
+		case 5:
+			MovieTheaterData.movieE();
+			movies = m5;
+			break;
+		default:
+			System.out.println("ERROR");
+			break;
+		}
+		//click showtime
+		System.out.println("\nShowing? Enter Theater#: ");
+		String theater = user.next();
+		
+		///////transition -> to theater, theater ?full? check
+		
+		///////Tickets
+		System.out.println("\nHow many tickets?");
+			int amount = user.nextInt();
+			for (int t = 0; t < amount; t++){
+				System.out.print("Enter type of ticket -> 1 = Gen. Adm.($9.75)  2 = Child($5.50)  3 = Senior($6.50): ");
+				int type = user.nextInt();
+				switch (type){
+				case 1:
+					tickets.add(9.75);
+					break;
+				case 2:
+					tickets.add(5.50);
+					break;
+				case 3:
+					tickets.add(6.50);
+					break;
+				default:
+					System.out.println("ERROR");
+					break;
+				}
+			}
+			double cost = 0;
+			double tax = amount*0.95;
+			int id = 0;
+			for (Double element: tickets){ 
+				double value = tickets.get(id);
+				cost = cost + (value);
+				id++;
+			}
+			double fee = amount*1.50;
+			double total = cost + tax + fee;
+			
+			///////Reserve Seats
+			System.out.print("\nSeats Available");
+			MovieTheaterData.theater1();
+			System.out.print("\nChoose Seats\n");
+			for (int s = 0; s < amount; s++) {
+				MovieTheaterData.seatUnThea1();
+			}
+			
+			///////Shopping Cart
+			Seating rs = new Seating();
+			System.out.println("\n" + movies);
+			System.out.println("Theater: " + theater); 
+			System.out.println(amount + " Tickets");
+			System.out.println("Ticket cost: $" + df.format(cost) + "\nTax: $" + df.format(tax) + "\nOnline fee: $" + df.format(fee));
+			System.out.print("\nEnter credit/debit card# (16-digit): ");
+			String card = user.next();
+			String Timestamp = new SimpleDateFormat("yyyy.dd.MM.HH:mm.ss").format(new java.util.Date());
+			
+			///////Confirmation Page
+			System.out.println("\n" + movies + " Saturday, July 28 at ?time?");
+			System.out.println("CineWorld 7 XD\n\tAtlanta, Georgia");
+			System.out.print("Tickets: ");
+			rs.see();
+			System.out.println("Final Total: $" + df.format(total));
+			System.out.println("Card " + card +  " Charged " + Timestamp);
+			Random random = new Random();
+			int confirm = 1000000 + random.nextInt(8999999);
+			System.out.println("Confirmation#: " + df.format(confirm));
+	}
+}
