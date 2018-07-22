@@ -1,0 +1,450 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Scanner;
+import java.sql.SQLException;
+
+public class MovieTheaterData {
+	private static Connection connect;
+	private static Statement state;
+    private static ResultSet resultSet;
+    static Scanner user = new Scanner(System.in);
+    
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		connectDatabase();
+		/*theaters();
+		theater1();
+		theater2();
+		theater3();
+		theater4();
+		theater5();
+		movieListing();
+		movieA();
+		movieB();
+		movieC();
+		movieD();
+		movieE();
+		at12();
+		at315();
+		at430();
+		at545();
+		at7();*/
+		
+    System.out.print("\nSeats needed: ");/////////this is where the problem is
+		int group = user.nextInt();
+		for (int s = 0; s < group; s++) {
+			seatUnThea1();
+		}
+		theater1();  
+    
+		/*seatBecomeAvThea1(); /////////if I can't do what's above I cant start these
+		theater1();
+		theater1Full();
+		theater2Full();
+		theater3Full();
+		theater4Full();
+		theater5Full();*/
+		connect.close();
+   }  
+	
+	static void connectDatabase() throws SQLException, ClassNotFoundException {
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/MovieTheater?serverTimezone=UTC&autoReconnect=true&useSSL=false";
+		String user = "root";
+		String password = "password";
+		
+		try {
+			Class.forName(driver);
+			connect = DriverManager.getConnection(url, user, password);
+			if(!connect.isClosed()) {
+				System.out.println("Connecting...");
+			}
+		}
+		catch (ClassNotFoundException e) {
+			System.out.println("Driver Missing!");
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			System.out.println("Database Connected!");
+		}
+	}
+	
+	static void movieListing() throws SQLException { 
+		state = connect.createStatement();
+		String movies = "select * from showings";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void theaters() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theaters";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void theater1() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theater1";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void theater2() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theater2;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void theater3() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theater3;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void theater4() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theater4;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void theater5() throws SQLException { 
+		state = connect.createStatement();
+		String theaters = "select * from theater5;";
+		resultSet = state.executeQuery(theaters);
+		System.out.println();
+		String theater = null;
+		String row = null;
+		String seat = null;
+		String avail = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			row = resultSet.getString("ro");
+			seat = resultSet.getString("seat");
+			avail = resultSet.getString("availability");
+			System.out.print("Theater: " + theater + "\tRow: " + row + "\tSeat: " + seat + " is " + avail + "\n");
+		}
+	}
+	
+	static void movieA() throws SQLException { 
+		state = connect.createStatement();
+		String movies = "select theater, movie, dotw, tod from showings where movie = 'A'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieB() throws SQLException {
+		state = connect.createStatement();
+		String movies = "select theater, movie, dotw, tod from showings where movie = 'B'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieC() throws SQLException { 
+		state = connect.createStatement();
+		String movies = "select theater, movie, dotw, tod from showings where movie = 'C'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieD() throws SQLException {
+		state = connect.createStatement();
+		String movies = "select theater, movie, dotw, tod from showings where movie = 'D'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void movieE() throws SQLException {
+		state = connect.createStatement();
+		String movies = "select theater, movie, dotw, tod from showings where movie = 'E'";
+		resultSet = state.executeQuery(movies);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void at12() throws SQLException {
+		state = connect.createStatement();
+		String times = "select theater, movie, dotw, tod from showings where tod = '12:00:00'";
+		resultSet = state.executeQuery(times);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void at315() throws SQLException {
+		state = connect.createStatement();
+		String times = "select theater, movie, dotw, tod from showings where tod = '3:15:00'";
+		resultSet = state.executeQuery(times);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void at430() throws SQLException {
+		state = connect.createStatement();
+		String times = "select theater, movie, dotw, tod from showings where tod = '4:30:00'";
+		resultSet = state.executeQuery(times);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void at545() throws SQLException {
+		state = connect.createStatement();
+		String times = "select theater, movie, dotw, tod from showings where tod = '5:45:00'";
+		resultSet = state.executeQuery(times);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	
+	static void at7() throws SQLException {
+		state = connect.createStatement();
+		String times = "select theater, movie, dotw, tod from showings where tod = '7:00:00'";
+		resultSet = state.executeQuery(times);
+		System.out.println();
+		String theater = null;
+		String name = null;
+		String date = null;
+		String time = null;
+		while (resultSet.next()) {
+			theater = resultSet.getString("theater");
+			name = resultSet.getString("movie");
+			date = resultSet.getString("dotw");
+			time = resultSet.getString("tod");
+			System.out.print("Theater: " + theater + "\tMovie: " + name + "\tDate: " + date + "\tTime: " + time + "\n");
+		}
+	}
+	///////////////////////////////////////////////////////////////New Methods///////////////////////////////////////////////////////
+  
+	static void seatBecomeAvThea1() throws SQLException {
+		String availUpdate = "update theater1 set availability = 'AVAILABLE' where availability = 'UNAVAILABLE'";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.executeUpdate();
+	}
+	
+	static void seatUnThea1() throws SQLException {
+		System.out.print("Row: ");
+		String row = user.next().toUpperCase();
+		System.out.print("Seat: ");
+		int seat = user.nextInt();
+		String availUpdate = "update theater1 set availability = 'AVAILABLE' where ro = ? && seat = ?";
+		PreparedStatement unavail = connect.prepareStatement(availUpdate);
+		unavail.setString(1, row);
+		unavail.setInt(2, seat);
+		int s = unavail.executeUpdate();  
+		System.out.println("Check: " + s +" seat taken.");  
+	}
+	
+	static boolean theater1Full() throws SQLException {
+		state = connect.createStatement();
+		String times = "select row, seat from theaters where theater = 1 && availbility = AVAILABLE";
+		resultSet = state.executeQuery(times);
+		if (resultSet.wasNull())
+			return true;
+		return false;	
+	}
+	
+	static boolean theater2Full() throws SQLException {
+		state = connect.createStatement();
+		String times = "select row, seat from theaters where theater = 2 && availability = AVAILABLE";
+		resultSet = state.executeQuery(times);
+		if (resultSet.wasNull())
+			return true;
+		return false;	
+	}
+	
+	static boolean theater3Full() throws SQLException {
+		state = connect.createStatement();
+		String times = "select row, seat from theaters where theater = 3 && availbility = AVAILABLE";
+		resultSet = state.executeQuery(times);
+		if (resultSet.wasNull()) {
+			return true;
+		}return false;	
+	}
+	
+	static boolean theater4Full() throws SQLException {
+		state = connect.createStatement();
+		String times = "select row, seat from theaters where theater = 3 && availbility = AVAILABLE";
+		resultSet = state.executeQuery(times);
+		if (resultSet.wasNull()) {
+			return true;
+		}return false;	
+	}
+	
+	static boolean theater5Full() throws SQLException {
+		state = connect.createStatement();
+		String times = "select row, seat from theaters where theater = 3 && availbility = AVAILABLE";
+		resultSet = state.executeQuery(times);
+		if (resultSet.wasNull()) {
+			return true;
+		}return false;	
+	}
+}
