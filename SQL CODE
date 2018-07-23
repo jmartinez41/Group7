@@ -1,0 +1,105 @@
+/*create table movietimes (
+timeID int not null,
+movie varchar(255) not null,
+tod varchar(255) not null
+);
+
+create table m1t1 as
+select ro, seat, avail
+from theater0005;
+
+create table m1t2 as
+select ro, seat, avail
+from theater0005;
+
+create table m1t3 as
+select ro, seat, avail
+from theater0005;
+
+create table m1t4 as
+select ro, seat, avail
+from theater0005;
+
+create table m1t5 as
+select ro, seat, avail
+from theater0005;
+
+create table m2t1 as
+select ro, seat, avail
+from theater0005;
+
+create table m2t2 as
+select ro, seat, avail
+from theater0005;
+
+create table m2t3 as
+select ro, seat, avail
+from theater0005;
+
+create table m2t4 as
+select ro, seat, avail
+from theater0005;
+
+create table m2t5 as
+select ro, seat, avail
+from theater0005;
+
+create table m3t1 as
+select ro, seat, avail
+from theater0005;
+
+create table m3t2 as
+select ro, seat, avail
+from theater0005;
+
+create table m3t3 as
+select ro, seat, avail
+from theater0005;
+
+create table m3t4 as
+select ro, seat, avail
+from theater0005;
+
+create table m3t5 as
+select ro, seat, avail
+from theater0005;
+
+create table m4t1 as
+select ro, seat, avail
+from theater0005;
+
+create table m4t2 as
+select ro, seat, avail
+from theater0005;
+
+create table m4t3 as
+select ro, seat, avail
+from theater0005;
+
+create table m4t4 as
+select ro, seat, avail
+from theater0005;
+
+create table m4t5 as
+select ro, seat, avail
+from theater0005;
+
+create table m5t1 as
+select ro, seat, avail
+from theater0005;
+
+create table m5t2 as
+select ro, seat, avail
+from theater0005;
+
+create table m5t3 as
+select ro, seat, avail
+from theater0005;
+
+create table m5t4 as
+select ro, seat, avail
+from theater0005;
+
+create table m5t5 as
+select ro, seat, avail
+from theater0005;
